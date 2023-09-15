@@ -1,4 +1,4 @@
-
+---Quick project on COVID exploring global figures as well as figures related to Africa and Nigeria
 ----load tables and view the content
 select *
 from dbo.['Covid-deaths]
