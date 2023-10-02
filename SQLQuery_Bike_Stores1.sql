@@ -1,3 +1,9 @@
+---ABOUT
+---In this guided project courtesy of Data Guru, using SQL queries, I Created a Dataset comprising of several tables containing data from an imaginary bike share business.
+---The task here is to extract relevant data from the various tables pertaining business performance, format the data to requirements and then extract the final results for 
+---into Excel and Tableau for further Analysis and visiualization.
+--- The objective of the project is to utilize key performance metrics to Analyze and create visualizations to guide business decision making by Executives.
+
 ---View the tables contining the datasets
 SELECT *
 FROM [production].[categories]
@@ -10,7 +16,6 @@ FROM [production].[brands]
 
 SELECT *
 FROM [production].[stocks]
-
 
 SELECT *
 FROM [sales].[customers]
@@ -28,8 +33,10 @@ SELECT *
 FROM [sales].[staffs]
 
 
---- Extract specific data needed and perform calculations
---- The query pulls out data from several tables using JOINs to identify orders , customer detils , product details (Name,quantity, category) and revenue as well as store and sales rep details.
+--- Extract specific data needed and perform calculations to further explore the data
+--- The query pulls out data from several tables using JOINs to identify orders , customer detils , product details (Name,quantity, category) 
+--- and revenue as well as store and sales rep details.
+  
 SELECT
 ord.Order_id,
 CONCAT(cus.first_name,' ',cus.last_name) Customer_Name,
