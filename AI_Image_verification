@@ -1,0 +1,34 @@
+import streamlit as st
+import torch
+from transformers import AutoModelForImageClassification, AutoImageProcessor
+from PIL import Image
+
+MODEL_ID = "Okohogbole/ai-vs-real-resnet50"
+
+@st.cache_resource
+def load_model():
+    model = AutoModelForImageClassification.from_pretrained(MODEL_ID)
+    processor = AutoImageProcessor.from_pretrained(MODEL_ID)
+    model.eval()
+    return model, processor
+
+model, processor = load_model()
+
+st.title("AI vs Real Image Detector")
+
+uploaded_file = st.file_uploader(
+    "Upload an image", type=["jpg", "jpeg", "png"]
+)
+
+if uploaded_file:
+    image = Image.open(uploaded_file).convert("RGB")
+    st.image(image, use_container_width=True)
+
+    inputs = processor(images=image, return_tensors="pt")
+
+    with torch.no_grad():
+        outputs = model(**inputs)
+        pred = torch.argmax(outputs.logits, dim=-1).item()
+
+    label_map = {0: "Real Image", 1: "AI-Generated Image"}
+    st.success(f"Prediction: **{label_map[pred]}**")
